@@ -2,7 +2,7 @@
 ## Lancer le programme.
 -   Afin de lancer le porgramme, il est conseiller pour les utilisateurs Windows d'ouvrir un invité de commande et taper la commande suivante :
 
-```spark-submit /Script/Script_Walmart.py```
+```spark-submit Script/Script_Walmart.py```
 
 ⚠️ Assurez - Vous d'étre dans le bon ficher
 
@@ -28,6 +28,8 @@
 |    2012-01-03   | 4.17E-06   |
 |    2012-01-04  | 6.29E-06   |
 
+Le fichier Excel est disponible dans son intégralité dans le fichier output sous le nom Hv_ration
+
 La valeur la plus haute de Walmart a été atteinte le 13/11/2015
 
 La valeur moyenne d'une action de Walmart a la fermeture est de 72.38$
@@ -47,6 +49,8 @@ Le tableau ci-dessous retrace les valeur maximum que prennent walmart par an
 | 2014 | 88.08   |
 | 2014 | 90.97   |
 | 2016 | 75.19   |
+Le fichier Excel est disponible dans son intégralité dans le fichier output sous le nom Max_ans
+
 
 le dernier tableau represente la valeur moyenne des action de Walmart à par mois
 
@@ -59,3 +63,5 @@ le dernier tableau represente la valeur moyenne des action de Walmart à par moi
 |2012-05|61.456363409090905|
 
 L'analyse a su monter que les actions de Walmart sont des actions qui coutent en moyene moins de 100$ et que ces dernier emettent beaucoup au minimum 100000 par jours. 
+Le fichier Excel est disponible dans son intégralité dans le fichier output sous le nom Moy_Mois
+
