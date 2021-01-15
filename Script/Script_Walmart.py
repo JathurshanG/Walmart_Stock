@@ -19,12 +19,13 @@ spark = SparkSession.builder\
                     
 dt=spark.read\
         .option("header",True)\
-        .csv("Input/walmart_stock.csv")
+        .csv("../Input/walmart_stock.csv")
+
 #les données represente les cours de l'action de Walmard 
 dt.show(2)
 
 #3Columns Names
-dt.column
+dt.columns
 #Colnames of    
 #Date|Open| High|Low|Close|Volume|Adj Close|
 
@@ -62,7 +63,7 @@ spark.sql("""SELECT Count (*)  as Compte FROM Stock WHERE( Close <= 60)""")\
     .show()
 
 #11) Max Per Year
-dt1.groupBy(F.year("Date")).agg({'High': 'max'}).sort(F.year("Date"))\
+dt1.groupBy(F.year("Date").alias("Année")).agg(F.max("High").alias("Max_High")).sort(F.year("Date"))\
    .show()
 #methode SQL
 spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
@@ -72,11 +73,16 @@ spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
 #12) Average per Month
 #12) average Close for each Calendar Month
 
-dt.groupBy(F.last_day('date'))\
-  .agg({'Close': 'mean'})\
-  .sort(F.last_day('date'))\
-  .show()
-#methode SQL
+dt6=dt.groupBy(F.last_day('date').alias("Moi_Annee"))\
+.agg({'Close': 'mean'})\
+.sort(F.last_day('date'))\
+
+dt6.select(F.date_format("Moi_Annee","yyyy-MM").alias("Annee"),col("avg(Close)").alias("AvG_Close"))\
+   .show()
+#methode SQL#methode SQL
+spark.sql("""SELECT SUBSTR(Date,1,7) as Annee, avg(Close) as Avg_Close 
+FROM Stock \
+Group By Annee Order by Annee""").show()
 
 ##Arreter Spark
 spark.stop()
