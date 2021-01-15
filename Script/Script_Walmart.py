@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
-
+# ==================================================================
+#                            Groupe 15 :
+#                          Projet DataFrame
+#                        Walmart Stock Analysis
+# ==================================================================
 
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
@@ -11,18 +14,18 @@ spark = SparkSession.builder\
                     .appName("walmart")\
                     .getOrCreate()
 
-#2) important les données de Walmart stock
-                    
-dt=spark.read\
-        .option("header",True)\
-        .csv("../Input/walmart_stock.csv")
+# 2) important les données de Walmart stock
 
-#les données represente les cours de l'action de Walmard 
+dt = spark.read \
+    .option("header", True) \
+    .csv("../Input/walmart_stock.csv")
+
+# les données represente les cours de l'action de Walmard
 dt.show(2)
 
 #3Columns Names
 dt.columns
-#Colnames of    
+#Colnames of
 #Date|Open| High|Low|Close|Volume|Adj Close|
 
 #4) Print Schema de la base de donnée
@@ -41,22 +44,29 @@ dt1.createOrReplaceTempView("Stock")
 spark.sql("""SELECT Date FROM Stock ORDER BY High""").show(1)
 #solution
 
-#8) Calcul de la moyenne
+#7) Calcul de la moyenne
 dt1.select("Close").summary("mean").show()
 # Méthode Sql
 spark.sql("""SELECT AVG(Close) as AVG_Close  FROM Stock """).show()
 
-#9) Min et Max de Close 
+#8) Min et Max de Close
 dt1.select("Volume").summary("min","max").show()
 # Méthode Sql
 spark.sql("""SELECT Min(Volume) as Min_Close, Max(Volume) as Max_Close  FROM Stock """)\
     .show()
 
-#10)How many was the Close lower than 60 dollars?
+#09)How many was the Close lower than 60 dollars?
 dt1.filter(dt.Close<=60).count()
+
 #methode SQL
 spark.sql("""SELECT Count (*)  as Compte FROM Stock WHERE( Close <= 60)""")\
     .show()
+
+#10) % high
+n=dt1.count()
+print((dt1.filter(dt.High>=80).count()/n)*100)
+
+spark.sql("""SELECT Count(*)/ (SELECT Count(*) FROM Stock)*100 as Pr FROM Stock Where(High>=80) """).show()
 
 #11) Max Per Year
 dt1.groupBy(F.year("Date").alias("Année")).agg(F.max("High").alias("Max_High")).sort(F.year("Date"))\
