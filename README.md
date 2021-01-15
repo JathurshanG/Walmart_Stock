@@ -23,6 +23,7 @@
   - au prix le plus bas de l'action ( Low)
   
   Le ratio HV permet de determiné le prix maximum d'une action. dans notre cas les premières valeurs pour ce ratio est donnée par le tableaux suivant  :
+
 |Date    |Hv_Ratio    | 
 |-------- |--------    | 
 |    2012-01-03   | 4.17E-06   |
@@ -49,6 +50,7 @@ Le tableau ci-dessous retrace les valeur maximum que prennent walmart par an
 | 2014 | 88.08   |
 | 2014 | 90.97   |
 | 2016 | 75.19   |
+
 Le fichier Excel est disponible dans son intégralité dans le fichier output sous le nom Max_ans
 
 
@@ -63,5 +65,6 @@ le dernier tableau represente la valeur moyenne des action de Walmart à par moi
 |2012-05|61.456363409090905|
 
 L'analyse a su monter que les actions de Walmart sont des actions qui coutent en moyene moins de 100$ et que ces dernier emettent beaucoup au minimum 100000 par jours. 
+
 Le fichier Excel est disponible dans son intégralité dans le fichier output sous le nom Moy_Mois
 
