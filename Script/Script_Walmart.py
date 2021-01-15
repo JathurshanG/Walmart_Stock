@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 14 17:57:48 2021
 
-@author: jathurshan GNANASEELAN
-"""
 
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
@@ -69,8 +65,6 @@ dt1.groupBy(F.year("Date").alias("Année")).agg(F.max("High").alias("Max_High"))
 spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
           Group By Annee Order by Annee  """).show()
 
-
-#12) Average per Month
 #12) average Close for each Calendar Month
 
 dt6=dt.groupBy(F.last_day('date').alias("Moi_Annee"))\
@@ -86,4 +80,3 @@ Group By Annee Order by Annee""").show()
 
 ##Arreter Spark
 spark.stop()
-
