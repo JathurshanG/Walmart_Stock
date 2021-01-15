@@ -68,6 +68,7 @@ dt1.groupBy(F.year("Date")).agg({'High': 'max'}).sort(F.year("Date"))\
 spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
           Group By Annee Order by Annee  """).show()
 
+
 #12) Average per Month
 #12) average Close for each Calendar Month
 
@@ -76,10 +77,6 @@ dt.groupBy(F.last_day('date'))\
   .sort(F.last_day('date'))\
   .show()
 #methode SQL
-spark.sql().show()
-
-spark.stop()
-
 
 ##Arreter Spark
 spark.stop()
