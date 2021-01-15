@@ -37,11 +37,12 @@ dt1=dt.withColumn("HV",col("High")/col("Volume"))
 
 #6) Peak High in Price.
 dt1.orderBy(col("High").desc()).select(col("Date")).head()
+dt1.toPandas().to_csv('Output/Hv_ratio.csv')
 # PeakHigh pRice with sql
 
 dt1.createOrReplaceTempView("Stock")
 #on transforme la DataTable en table
-spark.sql("""SELECT Date FROM Stock ORDER BY High""").show(1)
+spark.sql("""SELECT Date FROM Stock ORDER BY High Desc""").show(1)
 #solution
 
 #7) Calcul de la moyenne
@@ -69,8 +70,9 @@ print((dt1.filter(dt.High>=80).count()/n)*100)
 spark.sql("""SELECT Count(*)/ (SELECT Count(*) FROM Stock)*100 as Pr FROM Stock Where(High>=80) """).show()
 
 #11) Max Per Year
-dt1.groupBy(F.year("Date").alias("Année")).agg(F.max("High").alias("Max_High")).sort(F.year("Date"))\
-   .show()
+dt2=dt1.groupBy(F.year("Date").alias("Année")).agg(F.max("High").alias("Max_High")).sort(F.year("Date"))
+dt2.toPandas().to_csv('Output/Max_Ans.csv')
+
 #methode SQL
 spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
           Group By Annee Order by Annee  """).show()
@@ -81,8 +83,10 @@ dt6=dt.groupBy(F.last_day('date').alias("Moi_Annee"))\
 .agg({'Close': 'mean'})\
 .sort(F.last_day('date'))\
 
-dt6.select(F.date_format("Moi_Annee","yyyy-MM").alias("Annee"),col("avg(Close)").alias("AvG_Close"))\
+dt3=dt6.select(F.date_format("Moi_Annee","yyyy-MM").alias("Annee"),col("avg(Close)").alias("AvG_Close"))\
    .show()
+dt3=dt1.toPandas().to_csv('Output/Moy_Mois.csv')
+
 #methode SQL#methode SQL
 spark.sql("""SELECT SUBSTR(Date,1,7) as Annee, avg(Close) as Avg_Close 
 FROM Stock \
