@@ -52,10 +52,10 @@ le dernier tableau represente la valeur moyenne des action de Walmart à par moi
 
 |Date    |Valeur moyenne par mois   | 
 |-------|-------------------------- |
-|2012-01-31|        60.2354999|
-|2012-02-29|            60.898|
-|2012-03-31|60.433636818181796|
-|2012-04-30|60.149000150000006|
-|2012-05-31|61.456363409090905|
+|2012-01|        60.2354999|
+|2012-02|            60.898|
+|2012-03|60.433636818181796|
+|2012-04|60.149000150000006|
+|2012-05|61.456363409090905|
 
 L'analyse a su monter que les actions de Walmart sont des actions qui coutent en moyene moins de 100$ et que ces dernier emettent beaucoup au minimum 100000 par jours. 
