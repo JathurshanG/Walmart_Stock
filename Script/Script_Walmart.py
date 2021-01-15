@@ -24,7 +24,7 @@ dt=spark.read\
 dt.show(2)
 
 #3Columns Names
-dt.columns
+dt.column
 #Colnames of    
 #Date|Open| High|Low|Close|Volume|Adj Close|
 
@@ -58,7 +58,7 @@ spark.sql("""SELECT Min(Volume) as Min_Close, Max(Volume) as Max_Close  FROM Sto
 #10)How many was the Close lower than 60 dollars?
 dt1.filter(dt.Close<=60).count()
 #methode SQL
-spark.sql("""SELECT Count (*) FROM Stock WHERE( Close <= 60)""")\
+spark.sql("""SELECT Count (*)  as Compte FROM Stock WHERE( Close <= 60)""")\
     .show()
 
 #11) Max Per Year
@@ -68,8 +68,18 @@ dt1.groupBy(F.year("Date")).agg({'High': 'max'}).sort(F.year("Date"))\
 spark.sql("""SELECT  Year(Date) as Annee, max(High) as Max_High FROM Stock \
           Group By Annee Order by Annee  """).show()
 
+#12) Average per Month
 #12) average Close for each Calendar Month
-dt1.groupBy(F.month("Date")).agg({'High': 'max'}).sort(F.year("Date"))\
-   .show()
 
+dt.groupBy(F.last_day('date'))\
+  .agg({'Close': 'mean'})\
+  .sort(F.last_day('date'))\
+  .show()
+#methode SQL
+spark.sql().show()
+
+spark.stop()
+
+
+##Arreter Spark
 spark.stop()
