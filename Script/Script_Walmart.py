@@ -18,7 +18,7 @@ spark = SparkSession.builder\
 
 dt = spark.read \
     .option("header", True) \
-    .csv("../Input/walmart_stock.csv")
+    .csv("Input/walmart_stock.csv")
 
 # les données represente les cours de l'action de Walmard
 dt.show(2)
